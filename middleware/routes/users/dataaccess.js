@@ -8,5 +8,6 @@ module.exports = {
           .where({ UserName })
           .first()
       : db("Users"),
-  getUsersInDepartment: UserDepartment => db("Users").where({ UserDepartment })
+  getUsersInDepartment: UserDepartment => db("Users").where({ UserDepartment }),
+  getDepartments: () => db("Users").select("UserDepartment")
 };
