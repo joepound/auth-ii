@@ -9,9 +9,9 @@ const morgan = require("morgan");
 
 // const sessionConfig = require("./middleware/authentication/session/sessionConfig");
 
-// const rootRouter = require("./middleware/routes/rootRouter");
+const rootRouter = require("./middleware/routes/rootRouter");
 // const mainRouter = require("./middleware/routes/mainRouter");
-// const errorRouter = require("./middleware/routes/errorRouter");
+const errorRouter = require("./middleware/routes/errorRouter");
 
 // server setup
 const server = express();
@@ -26,8 +26,8 @@ server.use(morgan("dev"));
 // server.use(session(sessionConfig)); // Configured session length is currently at: 1 minute
 
 // custom routing middleware
-// server.use("/", rootRouter); // routing for root URL
+server.use("/", rootRouter); // routing for root URL
 // server.use("/api", mainRouter);
-// server.use(errorRouter); // routing for URL's resolving to bad queries
+server.use(errorRouter); // routing for URL's resolving to bad queries
 
 module.exports = server;
