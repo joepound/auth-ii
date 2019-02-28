@@ -5,9 +5,9 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-// const session = require("express-session");
+const session = require("express-session");
 
-// const sessionConfig = require("./middleware/authentication/session/sessionConfig");
+const sessionConfig = require("./middleware/auth/session/sessionConfig");
 
 const rootRouter = require("./middleware/routes/rootRouter");
 // const mainRouter = require("./middleware/routes/mainRouter");
@@ -23,7 +23,7 @@ server.use(express.json());
 server.use(cors());
 server.use(helmet());
 server.use(morgan("dev"));
-// server.use(session(sessionConfig)); // Configured session length is currently at: 1 minute
+server.use(session(sessionConfig)); // Configured session length is currently at: 1 minute
 
 // custom routing middleware
 server.use("/", rootRouter); // routing for root URL
