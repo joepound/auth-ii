@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 
 // import { UsersContext } from "../../providers/UsersProvider";
 
+import { DepartmentDropdownSelect } from "../DepartmentDropdownSelect";
+
 function AccountInfoForm(props) {
   // const {
   //   usernameInput,
@@ -60,6 +62,20 @@ function AccountInfoForm(props) {
           // value={passwordInput}
           // onChange={handleTextInputChange}
         />
+      </div>
+      <div className="userlist__account-info-form__field">
+        {pageName === "Register" && (
+          <>
+            {" "}
+            <label
+              className="userlist__account-info-form__field__label"
+              htmlFor="UserDepartment"
+            >
+              Department:{" "}
+            </label>
+            <DepartmentDropdownSelect />
+          </>
+        )}
       </div>
       <div className="userlist__account-info-form__buttons">
         <button

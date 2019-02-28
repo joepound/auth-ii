@@ -7,7 +7,7 @@
   }
 
   &__field {
-    margin: 0 auto 40px;
+    margin: 0 auto 37.5px;
 
     &__label {
       display: block;
@@ -27,7 +27,7 @@
   &__buttons {
     @include make-flex(row, center, center);
 
-    margin: 56.25px auto 0;
+    margin: 43.75px auto 0;
 
     %user-info-form-button {
       width: 87.5px;
