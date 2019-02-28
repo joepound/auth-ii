@@ -1,9 +1,7 @@
 const sendError = require("../errors/errorResponder");
 
-module.exports = (entryMsg, checkMsg, errorExitMsg) => ({
+module.exports = (checkMsg, errorExitMsg) => ({
   userRegistrationInfo: (req, res, next) => {
-    console.log(entryMsg);
-
     const userData = req.body;
 
     console.log(checkMsg);
@@ -21,8 +19,6 @@ module.exports = (entryMsg, checkMsg, errorExitMsg) => ({
     }
   },
   userLoginCredentials: (req, res, next) => {
-    console.log(entryMsg);
-
     const userData = req.body;
 
     console.log(checkMsg);
