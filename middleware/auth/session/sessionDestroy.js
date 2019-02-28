@@ -5,7 +5,7 @@ module.exports = (req, res) => {
         res.status(401).json({
           success: false,
           code: 401,
-          errorInfo: "You shall not pass!"
+          errorInfo: "An error may have occurred on logout."
         });
       } else {
         res
