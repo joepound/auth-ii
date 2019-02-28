@@ -1,11 +1,18 @@
+require("dotenv").config();
+
+const pg = require("pg");
+pg.defaults.ssl = true;
+
 module.exports = {
   // For Knex CLI only (use config named "server" for actual dev use) - need to do this for file pathing
   development: {
-    client: "sqlite3",
-    connection: {
-      filename: "./userlist.sqlite3"
-    },
+    client: "pg",
+    connection: process.env.DATABASE_URL,
     useNullAsDefault: true,
+    pool: {
+      min: 2,
+      max: 10
+    },
     migrations: {
       directory: "./migrations"
     },
@@ -17,16 +24,12 @@ module.exports = {
 
   // For actual dev use
   devServer: {
-    client: "sqlite3",
-    connection: {
-      filename: "./data/userlist.sqlite3"
-    },
+    client: "pg",
+    connection: process.env.DATABASE_URL,
     useNullAsDefault: true,
     pool: {
-      afterCreate: (conn, done) => {
-        // Ensure that foreign key constraints will be enabled
-        conn.run("PRAGMA foreign_keys = ON", done);
-      }
+      min: 2,
+      max: 10
     },
     migrations: {
       directory: "./data/migrations"
@@ -37,16 +40,12 @@ module.exports = {
   },
 
   production: {
-    client: "sqlite3",
-    connection: {
-      filename: "./data/userlist.sqlite3"
-    },
+    client: "pg",
+    connection: process.env.DATABASE_URL,
     useNullAsDefault: true,
     pool: {
-      afterCreate: (conn, done) => {
-        // Ensure that foreign key constraints will be enabled
-        conn.run("PRAGMA foreign_keys = ON", done);
-      }
+      min: 2,
+      max: 10
     },
     migrations: {
       directory: "./data/migrations"

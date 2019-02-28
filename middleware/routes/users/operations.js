@@ -74,7 +74,7 @@ const getUsersInDepartment = (req, res) => {
   if (req.session && req.session.user) {
     const department = req.session.user.UserDepartment;
 
-    console.log("\nAttempting to GET all users...", department, "]");
+    console.log(`\nAttempting to GET all users in the department ${department}...`);
     dbHelper
       .getUsersInDepartment(department)
       .then(users => {
