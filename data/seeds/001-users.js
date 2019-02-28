@@ -8,19 +8,19 @@ exports.seed = (knex, Promise) =>
         {
           UserName: "User",
           UserPassword:
-            "$2a$12$UDDKseQRhFM39d4IYMD.k.yB1wmNbcsSZLPfizXcC8kztMW/kZLKG",
+            "$2a$12$UDDKseQRhFM39d4IYMD.k.yB1wmNbcsSZLPfizXcC8kztMW/kZLKG", // password
           UserDepartment: "Front End"
         },
         {
           UserName: "John Doe",
           UserPassword:
-            "$2a$12$Mu8GwKITHPm8uwHUf1kwTunnYQmR5tkGY0zVjbCPqYsRgbsYhIoX6",
+            "$2a$12$Mu8GwKITHPm8uwHUf1kwTunnYQmR5tkGY0zVjbCPqYsRgbsYhIoX6", // password
           UserDepartment: "Front End"
         },
         {
           UserName: "AzureDiamond",
           UserPassword:
-            "$2a$12$nP0wuXhwJH.PQPAVPgfx8.LFDGZqlofSi.PAAzrkTYmTmpn.9QYq.",
+            "$2a$12$nP0wuXhwJH.PQPAVPgfx8.LFDGZqlofSi.PAAzrkTYmTmpn.9QYq.", // 12345678
           UserDepartment: "Back End"
         }
       ])

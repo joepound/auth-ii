@@ -1,5 +1,6 @@
 const sessionRestrict = require("../../auth/session/sessionRestrict");
 const sessionDestroy = require("../../auth/session/sessionDestroy");
+const jwtRestrict = require("../../auth/jwt/jwtRestrict");
 
 const validate = require("../../errors/bodyValidator"); // For validating data placed in request bodies
 const logMsgs = require("./logMsgs"); // Status messages for console logging on this route
@@ -8,7 +9,7 @@ const operations = require("./operations"); // Contains the actual work to be do
 // Create express router
 const router = require("express").Router();
 
-router.get("/auth", sessionRestrict, operations.authenticate);
+router.get("/auth", sessionRestrict, jwtRestrict, operations.authenticate);
 
 router.post(
   "/register",
@@ -25,7 +26,12 @@ router.post(
   operations.login
 );
 
-router.get("/users", sessionRestrict, operations.getUsersInDepartment);
+router.get(
+  "/users",
+  sessionRestrict,
+  jwtRestrict,
+  operations.getUsersInDepartment
+);
 
 router.get("/logout", sessionDestroy);
 

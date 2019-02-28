@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     res.status(401).json({
       success: false,
       code: 401,
-      errorInfo: "You shall not pass!"
+      errorInfo: "You shall not pass (session restriction)!"
     });
   }
 };

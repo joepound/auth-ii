@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwtGenToken = require("../../auth/jwt/jwtGenToken");
 
 const dbHelper = require("./dataaccess");
 const sendError = require("../../errors/errorResponder");
@@ -43,13 +44,18 @@ const login = (req, res) => {
       if (userMatch) {
         console.log("Checking if correct password was supplied...");
         if (bcrypt.compareSync(userData.UserPassword, userMatch.UserPassword)) {
+          console.log("Setting up session...");
           req.session.user = userMatch;
-          res.status(200).json({
-            success: true,
-            data: {
-              message: `Login for user ${userData.UserName} was successful.`
-            }
-          });
+          console.log("Setting up token...");
+          jwtGenToken(userMatch).then(token =>
+            res.status(200).json({
+              success: true,
+              data: {
+                message: `Login for user ${userData.UserName} was successful.`,
+                token
+              }
+            })
+          );
         } else {
           sendError(res, 401, "You shall not pass!");
         }
