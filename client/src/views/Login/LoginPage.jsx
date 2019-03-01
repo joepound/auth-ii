@@ -11,9 +11,16 @@ function LoginPage(props) {
   const { authenticate, login } = useContext(UsersContext);
 
   useEffect(() => {
-    if (authenticate()) {
-      window.location.href = "/users";
-    }
+    authenticate()
+      .then(res => {
+        alert("success!");
+        window.location.href = "/users"
+      })
+      .catch(err => {
+        // setUsers(null);
+        console.log(err.toString());
+        return false;
+      });
   }, []);
 
   return (

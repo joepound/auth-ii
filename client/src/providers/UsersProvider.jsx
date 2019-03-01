@@ -33,17 +33,8 @@ function UsersProvider(props) {
     users,
 
     authenticate() {
-      axios
-        .get(`${baseURL}/auth`, getAuthToken())
-        .then(res => {
-          alert("success!");
-          return true;
-        })
-        .catch(err => {
-          setUsers(null);
-          console.log(err.toString());
-          return false;
-        });
+      return  axios.get(`${baseURL}/auth`, getAuthToken())
+        
     },
 
     getDepartments() {
