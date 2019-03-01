@@ -13,7 +13,9 @@ router.get("/auth", sessionRestrict, jwtRestrict, operations.authenticate);
 
 router.post(
   "/register",
-  operations.logStartOfOperation("\nAttempting to retrieve user departments..."),
+  operations.logStartOfOperation(
+    "\nAttempting to retrieve user departments..."
+  ),
   validate(...logMsgs.registerUser).userRegistrationInfo,
   operations.registerUser
 );

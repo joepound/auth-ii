@@ -3,6 +3,8 @@ import axios from "axios";
 
 export const UsersContext = createContext();
 
+axios.defaults.withCredentials = true;
+
 function UsersProvider(props) {
   const [departments, setDepartments] = useState([]);
 
@@ -12,7 +14,10 @@ function UsersProvider(props) {
 
   const [users, setUsers] = useState(null);
 
-  const baseURL = "https://joepound-ls-auth2-userlist.herokuapp.com/api";
+  const baseURL = "http://localhost:5000/api";
+  const getAuthToken = () => ({
+    headers: { Authorization: localStorage.getItem("token") }
+  });
   const usersContext = {
     departments,
 
@@ -28,20 +33,18 @@ function UsersProvider(props) {
     users,
 
     authenticate() {
-      let isAuthenticated = false;
       axios
-        .get(`${baseURL}/auth`)
-        .then(res => (isAuthenticated = true))
+        .get(`${baseURL}/auth`, getAuthToken())
+        .then(res => alert("success!"))
         .catch(err => {
           setUsers(null);
-          console.log(err);
+          console.log(err.toString());
         });
-      return isAuthenticated;
     },
 
     getDepartments() {
       axios
-        .get(`${baseURL}/departments`)
+        .get(`${baseURL}/departments`, getAuthToken())
         .then(res => setDepartments(res.data.departments))
         .catch(err => {
           alert("An error occurred in fetching departments.");
@@ -92,8 +95,9 @@ function UsersProvider(props) {
         axios
           .post(`${baseURL}/login`, userData)
           .then(res => {
+            localStorage.setItem("token", res.data.token);
             alert("Login was successful.");
-            window.localStorage.href = "/"
+            window.location.href = "/";
           })
           .catch(err => {
             alert("Login failed.");
@@ -117,7 +121,10 @@ function UsersProvider(props) {
     logout() {
       axios
         .get(`${baseURL}/logout`)
-        .then(res => alert("Logout was successful."))
+        .then(res => {
+          localStorage.setItem("token", "");
+          alert("Logout was successful.");
+        })
         .catch(err => {
           alert("An error occurred in logging out.");
           console.log(err);
