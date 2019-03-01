@@ -9,7 +9,6 @@ const operations = require("./operations"); // Contains the actual work to be do
 // Create express router
 const router = require("express").Router();
 
-// For testing authentication
 router.get("/auth", sessionRestrict, jwtRestrict, operations.authenticate);
 
 router.post(

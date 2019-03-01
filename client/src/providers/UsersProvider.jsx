@@ -14,7 +14,7 @@ function UsersProvider(props) {
 
   const [users, setUsers] = useState(null);
 
-  const baseURL = "http://localhost:5000/api";
+  const baseURL = "https://joepound-ls-auth2-userlist.herokuapp.com/api";
   const getAuthToken = () => ({
     headers: { Authorization: localStorage.getItem("token") }
   });
@@ -32,18 +32,19 @@ function UsersProvider(props) {
 
     users,
 
-    // For testing
-    // -----------
-    
-    // authenticate() {
-    //   axios
-    //     .get(`${baseURL}/auth`, getAuthToken())
-    //     .then(res => alert("success!"))
-    //     .catch(err => {
-    //       setUsers(null);
-    //       console.log(err.toString());
-    //     });
-    // },
+    authenticate() {
+      axios
+        .get(`${baseURL}/auth`, getAuthToken())
+        .then(res => {
+          alert("success!");
+          return true;
+        })
+        .catch(err => {
+          setUsers(null);
+          console.log(err.toString());
+          return false;
+        });
+    },
 
     getDepartments() {
       axios
@@ -112,7 +113,7 @@ function UsersProvider(props) {
 
     getAllUsers() {
       axios
-        .get(`${baseURL}/users`)
+        .get(`${baseURL}/users`, getAuthToken())
         .then(res => setUsers(res.data))
         .catch(err => {
           setUsers(null);

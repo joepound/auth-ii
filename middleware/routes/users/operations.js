@@ -10,7 +10,6 @@ const logStartOfOperation = entryMsg => (req, res, next) => {
   next();
 };
 
-// For testing authentication
 const authenticate = (req, res) => {
   res.status(200).json({ success: true, message: "Authenticated." });
 };
