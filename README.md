@@ -1,5 +1,9 @@
 # Authentication using JSON Web Tokens (JWTs)
 
+Client: https://joepound-ls-auth2-userlist.netlify.com
+
+Server: https://joepound-ls-auth2-userlist.herokuapp.com
+
 ## Topics
 
 - Authentication.
