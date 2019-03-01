@@ -3,7 +3,7 @@ module.exports = {
   secret: process.env.SESSION_SECRET_KEY || "SESSION",
   cookie: {
     maxAge: 1000 * 60 * 1,
-    secure: false
+    secure: true
   },
   httpOnly: true,
   resave: false,

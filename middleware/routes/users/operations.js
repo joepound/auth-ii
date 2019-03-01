@@ -52,6 +52,7 @@ const login = (req, res) => {
             res.status(200).json({
               success: true,
               message: `Login for user ${userData.UserName} was successful.`,
+              cookie: req.session.cookie,
               token
             })
           );
