@@ -12,7 +12,7 @@ function UsersProvider(props) {
 
   const [users, setUsers] = useState(null);
 
-  const baseURL = "http://localhost:5000/api";
+  const baseURL = "https://joepound-ls-auth2-userlist.herokuapp.com/api";
   const usersContext = {
     departments,
 
@@ -66,7 +66,10 @@ function UsersProvider(props) {
         };
         axios
           .post(`${baseURL}/register`, userData)
-          .then(res => alert("User registration successful."))
+          .then(res => {
+            alert("User registration successful.");
+            window.location.href = "/";
+          })
           .catch(err => {
             alert("An error occurred in user registration.");
             console.log(err);
@@ -88,7 +91,10 @@ function UsersProvider(props) {
         };
         axios
           .post(`${baseURL}/login`, userData)
-          .then(res => alert("Login was successful."))
+          .then(res => {
+            alert("Login was successful.");
+            window.localStorage.href = "/"
+          })
           .catch(err => {
             alert("Login failed.");
             setUsers(null);
@@ -123,6 +129,12 @@ function UsersProvider(props) {
       usersContext.textInputSetters[e.currentTarget.name](
         e.currentTarget.value
       );
+    },
+
+    clearUserInfoForm(e) {
+      setUsernameInput("");
+      setPasswordInput("");
+      setDepartmentInput("");
     }
   };
 

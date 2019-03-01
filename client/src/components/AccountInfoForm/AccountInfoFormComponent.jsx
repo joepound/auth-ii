@@ -8,7 +8,8 @@ function AccountInfoForm(props) {
   const {
     usernameInput,
     passwordInput,
-    handleTextInputChange
+    handleTextInputChange,
+    clearUserInfoForm
   } = useContext(UsersContext);
 
   let pageName;
@@ -23,6 +24,10 @@ function AccountInfoForm(props) {
     default:
       pageName = "User Info Form";
   }
+
+  useEffect(() => {
+    clearUserInfoForm();
+  }, []);
 
   return (
     <form className="userlist__account-info-form" onSubmit={props.action}>
@@ -87,6 +92,7 @@ function AccountInfoForm(props) {
         <button
           className="userlist__account-info-form__buttons__clear"
           type="reset"
+          onClick={clearUserInfoForm}
         >
           Clear
         </button>
