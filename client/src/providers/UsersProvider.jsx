@@ -32,15 +32,18 @@ function UsersProvider(props) {
 
     users,
 
-    authenticate() {
-      axios
-        .get(`${baseURL}/auth`, getAuthToken())
-        .then(res => alert("success!"))
-        .catch(err => {
-          setUsers(null);
-          console.log(err.toString());
-        });
-    },
+    // For testing
+    // -----------
+    
+    // authenticate() {
+    //   axios
+    //     .get(`${baseURL}/auth`, getAuthToken())
+    //     .then(res => alert("success!"))
+    //     .catch(err => {
+    //       setUsers(null);
+    //       console.log(err.toString());
+    //     });
+    // },
 
     getDepartments() {
       axios
