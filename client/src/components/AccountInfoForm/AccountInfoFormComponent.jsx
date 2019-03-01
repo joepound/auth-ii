@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from "react";
 
-// import { UsersContext } from "../../providers/UsersProvider";
+import { UsersContext } from "../../providers/UsersProvider";
 
 import { DepartmentDropdownSelect } from "../DepartmentDropdownSelect";
 
 function AccountInfoForm(props) {
-  // const {
-  //   usernameInput,
-  //   passwordInput,
-  //   handleTextInputChange
-  // } = useContext(UsersContext);
+  const {
+    usernameInput,
+    passwordInput,
+    handleTextInputChange
+  } = useContext(UsersContext);
 
   let pageName;
   switch (props.location.pathname) {
@@ -41,8 +41,8 @@ function AccountInfoForm(props) {
           placeholder="Enter username"
           required
           name="setUsernameInput"
-          // value={usernameInput}
-          // onChange={handleTextInputChange}
+          value={usernameInput}
+          onChange={handleTextInputChange}
         />
       </div>
       <div className="userlist__account-info-form__field">
@@ -59,8 +59,8 @@ function AccountInfoForm(props) {
           placeholder="Enter password"
           required
           name="setPasswordInput"
-          // value={passwordInput}
-          // onChange={handleTextInputChange}
+          value={passwordInput}
+          onChange={handleTextInputChange}
         />
       </div>
       <div className="userlist__account-info-form__field">

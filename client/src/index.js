@@ -4,13 +4,16 @@ import { BrowserRouter as Router, withRouter } from "react-router-dom";
 
 import "./index.scss";
 
+import UsersProvider from "./providers/UsersProvider";
 import App from "./App";
 
 const AppWithRouter = withRouter(App);
 
 ReactDOM.render(
-  <Router>
-    <AppWithRouter />
-  </Router>,
+  <UsersProvider>
+    <Router>
+      <AppWithRouter />
+    </Router>
+  </UsersProvider>,
   document.getElementById("root")
 );

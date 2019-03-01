@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwtGenToken = require("../../auth/jwt/jwtGenToken");
 
 const dbHelper = require("./dataaccess");
+const mappers = require("./mappers");
 const sendError = require("../../errors/errorResponder");
 
 const logStartOfOperation = entryMsg => (req, res, next) => {
@@ -10,7 +11,7 @@ const logStartOfOperation = entryMsg => (req, res, next) => {
 };
 
 const authenticate = (req, res) => {
-  res.status(200).json({ success: true, data: { message: "Authenticated." } });
+  res.status(200).json({ success: true, message: "Authenticated." });
 };
 
 const registerUser = (req, res) => {
@@ -23,7 +24,7 @@ const registerUser = (req, res) => {
     .then(() => {
       res.status(201).json({
         success: true,
-        data: { message: `User ${userData.UserName} has been registered.` }
+        message: `User ${userData.UserName} has been registered.`
       });
       console.log("User registration attempt finished.");
     })
@@ -50,10 +51,8 @@ const login = (req, res) => {
           jwtGenToken(userMatch).then(token =>
             res.status(200).json({
               success: true,
-              data: {
-                message: `Login for user ${userData.UserName} was successful.`,
-                token
-              }
+              message: `Login for user ${userData.UserName} was successful.`,
+              token
             })
           );
         } else {
@@ -74,11 +73,13 @@ const getUsersInDepartment = (req, res) => {
   if (req.session && req.session.user) {
     const department = req.session.user.UserDepartment;
 
-    console.log(`\nAttempting to GET all users in the department ${department}...`);
+    console.log(
+      `\nAttempting to GET all users in the department ${department}...`
+    );
     dbHelper
       .getUsersInDepartment(department)
       .then(users => {
-        res.status(200).json({ success: true, data: users });
+        res.status(200).json({ success: true, users });
         console.log("GET attempt for all users finished.");
       })
       .catch(err => {
@@ -92,10 +93,19 @@ const getUsersInDepartment = (req, res) => {
   }
 };
 
+const getDepartments = (req, res) => {
+  dbHelper.getDepartments().then(departments => {
+    departments = mappers.userDepartmentsToString(departments);
+    res.status(200).json({ success: true, departments });
+    console.log("GET attempt for all user departments finished.");
+  });
+};
+
 module.exports = {
   logStartOfOperation,
   authenticate,
   registerUser,
   login,
-  getUsersInDepartment
+  getUsersInDepartment,
+  getDepartments
 };

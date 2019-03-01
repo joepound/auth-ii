@@ -9,5 +9,9 @@ module.exports = {
           .first()
       : db("Users"),
   getUsersInDepartment: UserDepartment => db("Users").where({ UserDepartment }),
-  getDepartments: () => db("Users").select("UserDepartment")
+  getDepartments: () =>
+    db("Users")
+      .select("UserDepartment")
+      .distinct()
+      .orderBy("UserDepartment")
 };

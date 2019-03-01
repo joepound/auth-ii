@@ -13,7 +13,7 @@ router.get("/auth", sessionRestrict, jwtRestrict, operations.authenticate);
 
 router.post(
   "/register",
-  operations.logStartOfOperation("\nAttempting to register new user..."),
+  operations.logStartOfOperation("\nAttempting to retrieve user departments..."),
   validate(...logMsgs.registerUser).userRegistrationInfo,
   operations.registerUser
 );
@@ -34,5 +34,7 @@ router.get(
 );
 
 router.get("/logout", sessionDestroy);
+
+router.get("/departments", operations.getDepartments);
 
 module.exports = router;
